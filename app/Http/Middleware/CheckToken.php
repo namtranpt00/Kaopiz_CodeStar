@@ -16,10 +16,14 @@ class CheckToken
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->has('token')){
+        if($request->has('token')=='admin'){
+//            return 'Is Admin';
+
             return $next($request);
         }
+        else if($request->has('token')){
+            return redirect('/home');
+        }
         return redirect('/login');
-
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AfterMiddleware
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,9 @@ class AfterMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $response = $next($request);
-        $response->header('hello','Nam');
-        return $response;
+        if( $request->has('role')){
+            return $next($request);
+        }
+        return redirect('/task2');
     }
 }

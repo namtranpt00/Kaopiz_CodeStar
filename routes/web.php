@@ -19,8 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('home', function () {
-    return "Home Page";
-});
+    return "is admin";
+})->middleware(['check_token']);
 Route::get('login', function () {
     return "loginPage";
 });

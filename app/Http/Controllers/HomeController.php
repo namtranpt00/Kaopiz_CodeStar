@@ -19,20 +19,19 @@ class HomeController extends Controller
 
     public function task2Form(Request $request)
     {
-        if(!isset($request->slug)){
+        if (!isset($request->slug)) {
             return view('task2');
         }
-        if(!isset($request->title)){
+        if (!isset($request->title)) {
             return view('task2');
         }
-        if(!isset($request->contents)){
+        if (!isset($request->contents)) {
             return view('task2');
         }
-        return view('task2Display')->with(['slug'=>$request->slug,'title'=>$request->title,'content'=>$request->contents]);
-
-
+        return view('task2Display')->with(['slug' => $request->slug, 'title' => $request->title, 'content' => $request->contents]);
 
     }
+
     public function task2Display(Request $request)
     {
         return view('task2Display');
