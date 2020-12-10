@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckToken
+class CheckLogin
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,10 @@ class CheckToken
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->has('token')=='admin'){
-//            return 'Is Admin';
-
+        if($request->has('token')){
             return $next($request);
         }
-        else if($request->has('token')){
-            return redirect('/home');
-        }
-        return redirect('/login');
+        return redirect(route('login'));
+
     }
 }

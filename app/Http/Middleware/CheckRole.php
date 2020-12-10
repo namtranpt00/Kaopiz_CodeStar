@@ -16,9 +16,9 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if( $request->has('role')){
+        if($request->query('role')=='admin'){
             return $next($request);
         }
-        return redirect('/task2');
+       return redirect('home');
     }
 }

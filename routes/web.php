@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use \App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,26 +19,20 @@ use App\Http\Controllers\PostController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('home', function () {
-    return "is admin";
-})->middleware(['check_token']);
-Route::get('login', function () {
-    return "loginPage";
-});
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 Route::get('task1', [HomeController::class, 'task1'])->name('homework.task1');
-Route::get('task2', [HomeController::class, 'task2Form'])->name('homework.task2Form');
-Route::get('task2/display', [HomeController::class, 'task2Display'])->name('homework.task2Display');
-//Route::get('/welcome/', function () {
-//    return view('posts.index', ['name' => 'nam']);
-//});
-//Route::get('/home/{name?}', [HomeController::class, 'index']);
-//Route::get('/demo', [HomeController::class, 'demo']);
-//Route::get('/anotherDemo', [HomeController::class, 'anotherDemo']);
-//Route::get('/demo1', function (){
-//    return response('hello world',200)->header('content-type', 'text/plain');
-//}) ;
-//Route::get('posts',[PostController::class, 'index'])->name('posts.index');
-//Route::get('/task', [HomeController::class, 'task1']);
+Route::get('home',[HomeController::class, 'index'])->name('home');
+Route::get('post',[HomeController::class, 'post_create'])->name('post_create');
+//    ->middleware('login','check_role');
+Route::post('post',[HomeController::class, 'post_save'])->name('post_save');
+Route::get('post_list',[HomeController::class, 'post_list'])->name('post_list');
+Route::get('post/delete/{post}',[HomeController::class, 'post_delete'])->name('post_delete');
+Route::get('post/edit/{post}',[HomeController::class, 'post_edit'])->name('post_edit');
+Route::post('post/update/{post}',[HomeController::class, 'post_update'])->name('post_update');
+
 
 
 
