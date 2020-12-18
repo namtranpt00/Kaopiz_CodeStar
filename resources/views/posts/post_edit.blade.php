@@ -10,24 +10,57 @@
 
             <h1>Edit post</h1>
 
-            <form action="{{route('post_update',['post'=>$post->id])}}" method="POST">
+            <form action="{{route('post_update',['post'=>$post->id])}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group ">
                     <label for="slug">Slug <span class="require">*</span> </label>
-                    <input type="text" class="form-control" required name="slug" value="{{$post->slug}}"/>
+                    <input type="text" class="form-control" name="slug" value="{{$post->slug}}"/>
+                    @error('slug')<span class="text-danger">{{ $message }}</span> @enderror
+
                 </div>
 
                 <div class="form-group">
                     <label for="title">Title <span class="require">*</span></label>
-                    <input type="text" class="form-control" required name="title" value="{{$post->title}}"/>
+                    <input type="text" class="form-control" name="title" value="{{$post->title}}"/>
+                    @error('title')<span class="text-danger">{{ $message }}</span> @enderror
+
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description<span class="require">*</span></label>
-                    <textarea rows="5" class="form-control" required
+                    <textarea rows="5" class="form-control"
                               name="description">{{$post->description}}</textarea>
-                </div>
+                    @error('description')<span class="text-danger">{{ $message }}</span> @enderror
 
+                </div>
+                <div class="form-group">
+                    <label> User</label>
+                    <select class="form-control" name="select_user">
+                        {{--                        <option>--}}
+                        {{--                            {{$post->user->name}}--}}
+                        {{--                        </option>--}}
+                        {{--                        @foreach(\\)--}}
+                        @foreach($users as $user)
+                            <option value="{{$user->id}}">
+                                {{$user->name}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+{{--                <div class="form-group">--}}
+{{--                    <label> Categories</label>--}}
+{{--                    <select multiple class="form-control" name="select[]">--}}
+{{--                        @foreach($categories as $cate)--}}
+{{--                            <option value="{{$cate->id}}">--}}
+{{--                                {{$cate->category}}--}}
+{{--                            </option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                </div>--}}
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Post file input</label>
+                    <input type="file" class="form-control-file" id="image" name="image" >
+                </div>
                 <div class="form-group">
                     <p><span class="require">*</span> - required fields</p>
                 </div>

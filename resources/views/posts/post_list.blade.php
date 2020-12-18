@@ -19,6 +19,7 @@
             <th>slug</th>
             <th>title</th>
             <th>description</th>
+            <th>image</th>
             <th class="text-right text-nowrap">
                 <a href="{{route('post_create')}}" class="btn btn-sm btn-success">Thêm mới</a>
             </th>
@@ -31,6 +32,10 @@
                 <td>{{$post->slug}}</td>
                 <td>{{$post->title}}</td>
                 <td>{{$post->description}}</td>
+                <td>
+                    <img src="{{$post->image}}" alt="image">
+                </td>
+
                 <td class="text-right text-nowrap">
                     <a href="{{route('post_edit', ['post'=>$post->id])}}" class="btn btn-sm btn-primary ">Sửa</a>
                     <a href="{{route('post_delete', ['post'=>$post->id])}}" class="btn btn-sm btn-danger">Xóa</a>

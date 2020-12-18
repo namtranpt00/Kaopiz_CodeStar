@@ -4,6 +4,9 @@ use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use \App\Models\Post;
+use \App\Models\User;
+use App\Models\Profile;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,23 +20,25 @@ use \App\Models\Post;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return redirect()->route('home');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+})->middleware('auth');
+Route::get('logout',[LoginController::class, 'logout'])->name('logout');
 Route::get('task1', [HomeController::class, 'task1'])->name('homework.task1');
-Route::get('home',[HomeController::class, 'index'])->name('home');
-Route::get('post',[HomeController::class, 'post_create'])->name('post_create');
+Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('post', [PostController::class, 'post_create'])->name('post_create');
 //    ->middleware('login','check_role');
-Route::post('post',[HomeController::class, 'post_save'])->name('post_save');
-Route::get('post_list',[HomeController::class, 'post_list'])->name('post_list');
-Route::get('post/delete/{post}',[HomeController::class, 'post_delete'])->name('post_delete');
-Route::get('post/edit/{post}',[HomeController::class, 'post_edit'])->name('post_edit');
-Route::post('post/update/{post}',[HomeController::class, 'post_update'])->name('post_update');
+Route::post('post', [PostController::class, 'post_save'])->name('post_save');
+Route::get('post/list', [PostController::class, 'post_list'])->name('post_list');
+Route::get('post/delete/{post}', [PostController::class, 'post_delete'])->name('post_delete');
+Route::get('post/edit/{post}', [PostController::class, 'post_edit'])->name('post_edit');
+Route::post('post/update/{post}', [PostController::class, 'post_update'])->name('post_update');
 
 
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

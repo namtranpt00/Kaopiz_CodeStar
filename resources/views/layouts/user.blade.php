@@ -26,11 +26,17 @@
 
 </head>
 
-<body class="mt-5">
-@yield('content')
+<body>
+@include("layouts.user.header")
+    @yield('content')
 
-<script src="plugins/jquery/jquery.min.js"></script>
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="js/adminlte.min.js"></script>
+    @include("layouts.user.footer")
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="js/clean-blog.min.js"></script>
+
 </body>
+
 </html>
